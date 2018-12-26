@@ -8,7 +8,7 @@ public class Reply{
 
     @Id
     @GeneratedValue
-    public Long id;
+    private Long id;
 
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
     private User owner;
@@ -19,6 +19,14 @@ public class Reply{
     private Date date;
 
     private String content;
+
+    public Reply() {
+    }
+
+    public Reply(Date date, String content) {
+        this.date = date;
+        this.content = content;
+    }
 
     public Long getId() {
         return id;

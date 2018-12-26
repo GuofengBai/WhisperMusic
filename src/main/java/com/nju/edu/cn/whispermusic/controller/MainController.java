@@ -30,7 +30,7 @@ public class MainController{
             return "error";
         } else {
             session.setAttribute("userId", user.getId());
-            return "login";
+            return "redirect:/user";
         }
     }
 
@@ -49,7 +49,7 @@ public class MainController{
         } else {
             Long id = userService.register(username, password);
             session.setAttribute("userId", id);
-            return "register";
+            return "redirect:/user";
         }
 
     }

@@ -23,6 +23,15 @@ public class Whisper{
     @OneToMany(mappedBy = "whisper", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Reply> replies;
 
+    public Whisper() {
+    }
+
+    public Whisper(String title, String content, Date date) {
+        this.title = title;
+        this.content = content;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }
