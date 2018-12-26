@@ -11,11 +11,14 @@ public class Reply{
     public Long id;
 
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
-    public User owner;
+    private User owner;
 
-    public Date date;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    private Whisper whisper;
 
-    public String content;
+    private Date date;
+
+    private String content;
 
     public Long getId() {
         return id;
@@ -31,6 +34,14 @@ public class Reply{
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public Whisper getWhisper() {
+        return whisper;
+    }
+
+    public void setWhisper(Whisper whisper) {
+        this.whisper = whisper;
     }
 
     public Date getDate() {

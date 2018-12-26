@@ -1,22 +1,29 @@
 package com.nju.edu.cn.whispermusic.entity;
 
-import java.util.Set;
-
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User{
 
     @Id
     @GeneratedValue
-    public Long id;
+    private Long id;
 
-    public String username;
+    private String username;
 
-    public String password;
+    private String password;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @OneToMany(mappedBy="owner",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    public Set<Whisper> whispers;
+    private Set<Whisper> whispers;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Reply> replies;
 
     public Long getId() {
         return id;
@@ -50,4 +57,11 @@ public class User{
         this.whispers = whispers;
     }
 
+    public Set<Reply> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(Set<Reply> replies) {
+        this.replies = replies;
+    }
 }

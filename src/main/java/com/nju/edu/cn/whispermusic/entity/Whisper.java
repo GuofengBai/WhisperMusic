@@ -1,28 +1,27 @@
 package com.nju.edu.cn.whispermusic.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
-
-import javax.persistence.*;
 
 @Entity
 public class Whisper{
 
     @Id
     @GeneratedValue
-    public Long id;
+    private Long id;
 
-    public String title;
+    private String title;
 
-    public String content;
+    private String content;
 
-    public Date date;
+    private Date date;
 
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
-    public User owner;
+    private User owner;
 
-    @OneToMany(mappedBy="owner",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    public Set<Reply> replies;
+    @OneToMany(mappedBy = "whisper", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Reply> replies;
 
     public Long getId() {
         return id;
@@ -62,6 +61,14 @@ public class Whisper{
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public Set<Reply> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(Set<Reply> replies) {
+        this.replies = replies;
     }
 
 }
