@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<meta charset="UTF-8"/>
-<title>Title</title>
+    <title>用户注册</title>
+    <meta charset="UTF-8">
 </head>
 <body>
-<b>register</b>
+<p> 请输入账号信息</p>
+<form action="" method="post" name="login">
+    <label>用户名</label>
+    <input id="username" name="username" type="text"><br><br>
+    <label>密码</label>
+    <input id="password" name="passwoword" type="password"><br><br>
+    <label>确认密码</label>
+    <input id="repassowrd" name="repassowrd"  type="password"><br><br>
+    <br>
+    <input id="submit" value="注册" type="submit"><br>
+</form>
+<div class="registration">
+    已有账号？
+    <a class="" href="/login">
+        登录
+    </a>
+</div>
 </body>
 </html>
