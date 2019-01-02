@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="whisper.title"></title>
+</head>
+<body>
+<div th:include=""></div>
+<div>
+    <h3 th:text="whisper.title"></h3>
+    <table>
+        <thead>
+        <tr>
+            <td>回复</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tr th:each="reply:${whisper.replies}">
+            <td th:text="reply.content"></td>
+            <td>置顶</td>
+            <td>删除</td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

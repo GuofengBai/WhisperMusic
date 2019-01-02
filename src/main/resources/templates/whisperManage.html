@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>悄悄话列表</title>
+</head>
+<body>
+<div th:include=""></div>
+<div>
+    <h3>我的悄悄话列表</h3>
+    <table>
+        <thead>
+        <tr>
+            <td>标题</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <!--/*@thymesVar id="wisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
+        <tr th:each="whisper:${whispers}">
+            <td><a th:href="@{/detail(id=${whisper.id})}"><p th:text="whisper.title"></p></a></td>
+            <td><a th:href="@{/delete(id=${whisper.id})}">删除</a></td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
