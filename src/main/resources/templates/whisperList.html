@@ -4,11 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>悄悄话列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div th:include=""></div>
 <div>
-    <table>
+    <table class="table-hover">
         <thead>
         <tr>
             <td>标题</td>
@@ -22,6 +32,23 @@
         </tr>
     </table>
 
+</div>
+
+<div>
+    <table>
+        <tr>
+            <td><a th:href="@{/goods/page?pageNum=0}">首页</a></td>
+            <td th:switch="${pageNum}">
+                <p th:case="1"> <a th:href="@{/goods/page?pageNum=1}">上一页</a></p>
+                <p th:case="*"><a th:href="@{/goods/page(pageNum=${pageNum-1})}">上一页</a></p>
+            </td>
+            <td th:switch="${pageNum}">
+                <p th:case="${totalPages}"><a th:href="@{/goods/page(pageNum=${totalPages})}">下一页</a></p>
+                <p th:case="*"><a th:href="@{/goods/page(pageNum=${pageNum+1})}">下一页</a></p>
+            </td>
+            <td><a th:href="@{/goods/page(pageNum=${totalPages})}">尾页</a></td>
+        </tr>
+    </table>
 </div>
 
 </body>
