@@ -9,7 +9,7 @@ public interface WhisperService {
 
     Page<Whisper> getWhisperListOfUser(Long userId, Integer page);
 
-    Whisper createWhisper(Whisper whisper);
+    Whisper createWhisper(Long ownerId, Whisper whisper);
 
     Whisper getWhisper(Long id);
 
