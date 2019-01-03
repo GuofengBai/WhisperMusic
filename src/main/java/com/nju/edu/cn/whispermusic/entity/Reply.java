@@ -21,10 +21,11 @@ public class Reply{
     private String content;
 
     public Reply() {
+        this.date = new Date();
     }
 
-    public Reply(Date date, String content) {
-        this.date = date;
+    public Reply(String content) {
+        this.date = new Date();
         this.content = content;
     }
 

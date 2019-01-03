@@ -24,12 +24,13 @@ public class Whisper{
     private Set<Reply> replies;
 
     public Whisper() {
+        this.date = new Date();
     }
 
-    public Whisper(String title, String content, Date date) {
+    public Whisper(String title, String content) {
         this.title = title;
         this.content = content;
-        this.date = date;
+        this.date = new Date();
     }
 
     public Long getId() {

@@ -2,6 +2,8 @@ package com.nju.edu.cn.whispermusic.service.impl;
 
 import com.nju.edu.cn.whispermusic.dao.ReplyDao;
 import com.nju.edu.cn.whispermusic.entity.Reply;
+import com.nju.edu.cn.whispermusic.entity.User;
+import com.nju.edu.cn.whispermusic.entity.Whisper;
 import com.nju.edu.cn.whispermusic.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +19,13 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public Reply createReply(Long whisperId, Long ownerId, Reply reply) {
-        return null;
+        Whisper whisper = new Whisper();
+        whisper.setId(whisperId);
+        User owner = new User();
+        owner.setId(ownerId);
+        reply.setWhisper(whisper);
+        reply.setOwner(owner);
+        return replyDao.save(reply);
     }
 
     @Override
