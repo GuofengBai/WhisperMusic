@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="head::head('悄悄话列表')">
+    <meta charset="UTF-8">
+    <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
+    <title th:title="whisper.name">标题</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="../static/css/default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="col-lg-8">
+
+        <h2 th:text="whisper.name">标题</h2>
+        <br>
+
+        <p th:text="whisper.date">发表于：</p>
+
+
+    </div>
+
+    <div class="col-lg-8" id="whisperDetail">
+        <hr>
+        <p th:text="whisper.content">&emsp;&emsp;这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容</p>
+
+    </div>
+    <div class="col-lg-8" id="replys">
+        <hr>
+        <table class="table-hover">
+
+
+            <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
+            <tr th:each="reply:${replys}">
+                <td>
+                    <p th:text="reply.content">假装有一小段回复内容，假装有一小段回复内容，假装有一小段回复内容</p>
+                    <p th:text="reply.data" style="float: right">回复于：</p>
+                </td>
+
+            </tr>
+        </table>
+        <br><br>
+        <div>
+        <table>
+            <tr>
+                <td><a th:href="@{/goods/page?pageNum=0}">首页</a></td>
+                <td th:switch="${pageNum}">
+                    <p th:case="1"> <a th:href="@{/goods/page?pageNum=1}">上一页</a></p>
+                    <p th:case="*"><a th:href="@{/goods/page(pageNum=${pageNum-1})}">上一页</a></p>
+                </td>
+                <td th:switch="${pageNum}">
+                    <p th:case="${totalPages}"><a th:href="@{/goods/page(pageNum=${totalPages})}">下一页</a></p>
+                    <p th:case="*"><a th:href="@{/goods/page(pageNum=${pageNum+1})}">下一页</a></p>
+                </td>
+                <td><a th:href="@{/goods/page(pageNum=${totalPages})}">尾页</a></td>
+            </tr>
+        </table>
+    </div>
+    </div>
+
+</div>
+</body>
+</html>

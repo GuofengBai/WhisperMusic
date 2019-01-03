@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       lang="zh-CN">
-<head>
+<head  th:replace="head::head('悄悄话列表')">
     <title>新建悄悄话</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,14 +16,16 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <link href="../static/css/default.css" type="text/css" rel="stylesheet">
+
 </head>
 <body>
-<div class="container-fluid" style="float:left;">
-    <div class="col-lg-12">
+<div class="container">
+    <div class="col-lg-8">
         <h2>新建悄悄话</h2>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-8">
         <form action="/login" method="post" name="login">
             <br>
             <input id="title" name="title" type="text" placeholder="你有什么想分享的心情" style="width:640px;height: 30px"><br><br>

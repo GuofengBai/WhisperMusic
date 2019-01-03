@@ -25,7 +25,7 @@
             <td>回复数</td>
         </tr>
         </thead>
-        <!--/*@thymesVar id="wisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
+        <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
         <tr th:each="whisper:${whispers}">
             <td><a th:href="@{/detail(id=${whisper.id})}"><p th:text="whisper.title"></p></a></td>
             <td th:text=""></td>
