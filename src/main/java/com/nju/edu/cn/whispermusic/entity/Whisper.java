@@ -2,6 +2,8 @@ package com.nju.edu.cn.whispermusic.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,7 +23,7 @@ public class Whisper{
     private User owner;
 
     @OneToMany(mappedBy = "whisper", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Reply> replies;
+    private Set<Reply> replies = new HashSet<>();
 
     public Whisper() {
         this.date = new Date();
@@ -81,4 +83,16 @@ public class Whisper{
         this.replies = replies;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Whisper whisper = (Whisper) o;
+        return id.equals(whisper.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

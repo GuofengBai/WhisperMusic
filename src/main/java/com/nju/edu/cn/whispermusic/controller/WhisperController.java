@@ -4,14 +4,12 @@ import com.nju.edu.cn.whispermusic.entity.Reply;
 import com.nju.edu.cn.whispermusic.entity.Whisper;
 import com.nju.edu.cn.whispermusic.service.ReplyService;
 import com.nju.edu.cn.whispermusic.service.WhisperService;
+import com.nju.edu.cn.whispermusic.vo.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -51,9 +49,16 @@ public class WhisperController {
 
     @RequestMapping(value = "/{whisperId}", method = RequestMethod.GET)
     public String whisperDetailPage(Model model, @PathVariable("whisperId") Long whisperId) {
-        Whisper whisper = whisperService.getWhisper(whisperId);
-        model.addAttribute("whisper", whisper);
+        //Whisper whisper = whisperService.getWhisper(whisperId);
+        //model.addAttribute("whisper", whisper);
         return "whisperDetail";
+    }
+
+    @RequestMapping(value = "/{whisperId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Response deleteWhisper(Model model, @PathVariable("whisperId") Long whisperId) {
+        whisperService.deleteWhisper(whisperId);
+        return new Response<>("OK!", "delete whisper-" + whisperId + " successfully.", "");
     }
 
     @RequestMapping(value = "/{whisperId}/replies/", method = RequestMethod.POST)
@@ -62,6 +67,13 @@ public class WhisperController {
         Reply reply = new Reply(content);
         reply = replyService.createReply(whisperId, userId, reply);
         return "redirect:/whisper/" + whisperId;
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @ResponseBody
+    public Page testWhisperListPage(Model model, @RequestParam(required = false, defaultValue = "1") Integer page) {
+        Page<Whisper> whisperPage = whisperService.getWhisperList(page);
+        return whisperPage;
     }
 
 }

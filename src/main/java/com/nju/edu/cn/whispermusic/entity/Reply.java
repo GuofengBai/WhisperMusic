@@ -2,6 +2,7 @@ package com.nju.edu.cn.whispermusic.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class Reply{
@@ -67,5 +68,18 @@ public class Reply{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reply reply = (Reply) o;
+        return id.equals(reply.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
