@@ -27,14 +27,35 @@
             <td>操作</td>
         </tr>
         </thead>
-        <!--/*@thymesVar id="wisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
-        <tr th:each="whisper:${whispers}">
-            <td><a th:href="@{/detail(id=${whisper.id})}"><p th:text="whisper.title"></p></a></td>
-            <td><a th:href="@{/delete(id=${whisper.id})}">删除</a></td>
+        <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
+        <tr th:each="whisper:${page.content}">
+            <td><a th:href="@{/whisper/{id}(id=${whisper.id})}"><p th:text="whisper.title"></p></a></td>
+            <td><button type="button" th:onclick="'javascript:delWhisper('+${whisper.id}+')'">删除</button></td>
         </tr>
     </table>
 
 </div>
+
+<div>
+    <table>
+        <tr>
+            <td><a th:href="@{/user/whisper}">首页</a></td>
+            <td th:switch="${page.pageable.pageNumber}">
+                <p th:case="1">上一页</p>
+                <p th:case="*"><a th:href="@{/user/whisper(page=${(page.pageable.pageNumber)-1})}">上一页</a></p>
+            </td>
+            <td>
+                <p th:if="${page.pageable.last}">下一页</p>
+                <p th:if="not ${page.pageable.last}"><a th:href="@{/user/whisper(pageNum=${page.pageable.pageNumber+1})}">下一页</a></p>
+            </td>
+            <td><a th:href="@{/user/whisper(pageNum=${page.pageable.totalPages})}">尾页</a></td>
+        </tr>
+    </table>
+</div>
+
+
+
+<script src="/static/js/del_whisper.js"></script>
 
 </body>
 </html>

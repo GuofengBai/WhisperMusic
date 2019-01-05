@@ -54,7 +54,7 @@ public class WhisperController {
         return "whisperDetail";
     }
 
-    @RequestMapping(value = "/{whisperId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{whisperId}/delete", method = RequestMethod.POST)
     @ResponseBody
     public Response deleteWhisper(Model model, @PathVariable("whisperId") Long whisperId) {
         whisperService.deleteWhisper(whisperId);
