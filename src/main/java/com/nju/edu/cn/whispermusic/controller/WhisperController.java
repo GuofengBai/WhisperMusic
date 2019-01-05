@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/whisper")
@@ -49,8 +50,10 @@ public class WhisperController {
 
     @RequestMapping(value = "/{whisperId}", method = RequestMethod.GET)
     public String whisperDetailPage(Model model, @PathVariable("whisperId") Long whisperId) {
-        //Whisper whisper = whisperService.getWhisper(whisperId);
-        //model.addAttribute("whisper", whisper);
+        Whisper whisper = whisperService.getWhisper(whisperId);
+        Page<Reply> replies=replyService.getReplyList(whisperId,0);
+        model.addAttribute("page",replies);
+        model.addAttribute("whisper", whisper);
         return "whisperDetail";
     }
 
