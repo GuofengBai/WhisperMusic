@@ -1,5 +1,7 @@
 package com.nju.edu.cn.whispermusic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -24,9 +26,11 @@ public class User{
         this.password = password;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy="owner",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<Whisper> whispers = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Reply> replies = new HashSet<>();
 
