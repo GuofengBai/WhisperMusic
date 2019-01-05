@@ -1,5 +1,7 @@
 package com.nju.edu.cn.whispermusic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -11,9 +13,11 @@ public class Reply{
     @GeneratedValue
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
     private User owner;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private Whisper whisper;
 

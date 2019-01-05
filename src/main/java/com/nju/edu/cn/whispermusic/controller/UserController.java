@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/whisper", method = RequestMethod.GET)
-    public String whisperManagePage(HttpSession session, Model model, @RequestParam(required = false, defaultValue = "1") Integer page) {
+    public String whisperManagePage(HttpSession session, Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         Long userId = (Long) session.getAttribute("userId");
         Page<Whisper> whisperPage = whisperService.getWhisperListOfUser(userId, page);
         model.addAttribute("page", whisperPage);

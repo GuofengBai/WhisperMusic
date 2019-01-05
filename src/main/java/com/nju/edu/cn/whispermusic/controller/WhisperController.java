@@ -24,7 +24,7 @@ public class WhisperController {
     private ReplyService replyService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String whisperListPage(Model model, @RequestParam(required = false, defaultValue = "1") Integer page) {
+    public String whisperListPage(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         Page<Whisper> whisperPage = whisperService.getWhisperList(page);
         model.addAttribute("page", whisperPage);
         return "whisperList";

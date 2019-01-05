@@ -21,12 +21,12 @@
     <table class="table-hover">
         <thead>
         <tr>
-            <td>标题</td>
+            <td>悄悄话列表</td>
         </tr>
         </thead>
         <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
         <tr th:each="whisper:${page.content}">
-            <td><a th:href="@{/whisper/{id}(id=${whisper.id})}"><p th:text="whisper.title"></p></a></td>
+            <td><a th:href="@{/whisper/{id}(id=${whisper.id})}"><p th:text="${whisper.title}"></p></a></td>
         </tr>
     </table>
 
@@ -37,14 +37,15 @@
         <tr>
             <td><a th:href="@{/whisper/}">首页</a></td>
             <td th:switch="${page.pageable.pageNumber}">
-                <p th:case="1">上一页</p>
+                <p th:case="0">上一页</p>
                 <p th:case="*"><a th:href="@{/whisper/(page=${(page.pageable.pageNumber)-1})}">上一页</a></p>
             </td>
+            <td><p th:text="' 第'+${page.pageable.pageNumber+1}+'页 '"></p></td>
             <td>
                 <p th:if="${page.last}">下一页</p>
                 <p th:if="not ${page.last}"><a th:href="@{/whisper/(page=${page.pageable.pageNumber+1})}">下一页</a></p>
             </td>
-            <td><a th:href="@{/whisper/(page=${page.totalPages})}">尾页</a></td>
+            <td><a th:href="@{/whisper/(page=${(page.totalPages)-1})}">尾页</a></td>
         </tr>
     </table>
 </div>

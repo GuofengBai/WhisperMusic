@@ -1,5 +1,7 @@
 package com.nju.edu.cn.whispermusic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -19,6 +21,7 @@ public class Whisper{
 
     private Date date;
 
+    @JsonIgnore
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
     private User owner;
 
