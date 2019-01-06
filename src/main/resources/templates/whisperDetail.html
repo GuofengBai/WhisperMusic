@@ -7,16 +7,16 @@
     <title>标题</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link href="../static/css/default.css" rel="stylesheet">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <link href="../static/css/default.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -37,37 +37,35 @@
     </div>
     <div class="col-lg-8" id="replys">
         <hr>
-        <table class="table-hover">
+        <table class="table table-hover">
             <p>回复列表：</p>
 
             <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
             <tr th:each="reply:${page.content}">
                 <td>
                     <p th:text="${reply.content}">假装有一小段回复内容，假装有一小段回复内容，假装有一小段回复内容</p>
-                    <p th:text="${reply.date}" style="float: right">回复于：</p>
+                    <p th:text="${reply.date}">回复于：</p>
                 </td>
 
             </tr>
         </table>
         <br><br>
         <hr>
-        <div class="col-lg-8">
-            <form th:action="@{/whisper/${whisper.id}/replies/}" method="post" name="newWhisperReply">
-                
-                <div class="row">
-                        <label>回复悄悄话</label>
-                        <input id="content" name="content" rows="3" cols="20" style="width: 400px;resize: none"></input><br><br>
+
+    </div>
+    <div class="col-lg-8">
+        <form th:action="@{/whisper/${whisper.id}/replies/}" method="post" name="newWhisperReply">
 
 
-                        <input id="submit" value="回 复" type="submit" class="btn-primary" style="width: 75px;height: 30px;background-color: dodgerblue;color: white"><br><br>
+            <label>回复悄悄话</label>
+            <input id="content" name="content" rows="3" cols="20" style="width: 640px;resize: none">
+            <br><br>
 
-                </div>
+            <input id="submit" value="回 复" type="submit" class="btn btn-primary"
+                   style="width: 75px;background-color: dodgerblue;color: white"><br><br>
 
 
-
-
-            </form>
-        </div>
+        </form>
     </div>
 
 </div>
