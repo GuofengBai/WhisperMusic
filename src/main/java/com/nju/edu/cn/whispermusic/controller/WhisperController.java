@@ -51,8 +51,8 @@ public class WhisperController {
     @RequestMapping(value = "/{whisperId}", method = RequestMethod.GET)
     public String whisperDetailPage(Model model, @PathVariable("whisperId") Long whisperId) {
         Whisper whisper = whisperService.getWhisper(whisperId);
-        Page<Reply> replies=replyService.getReplyList(whisperId,0);
-        model.addAttribute("page",replies);
+        //Page<Reply> replies=replyService.getReplyList(whisperId,0);
+        //model.addAttribute("page",replies);
         model.addAttribute("whisper", whisper);
         return "whisperDetail";
     }
