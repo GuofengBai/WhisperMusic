@@ -21,6 +21,8 @@ public class Whisper{
 
     private Date date;
 
+    private Integer like = 0;
+
     @JsonIgnore
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
     private User owner;
@@ -68,6 +70,14 @@ public class Whisper{
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Integer getLike() {
+        return like;
+    }
+
+    public void setLike(Integer like) {
+        this.like = like;
     }
 
     public User getOwner() {
