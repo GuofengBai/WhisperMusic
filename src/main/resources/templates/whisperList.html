@@ -7,48 +7,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<div>
-    <table class="table-hover">
-        <thead>
-        <tr>
-            <td>悄悄话列表</td>
-        </tr>
-        </thead>
-        <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
-        <tr th:each="whisper:${page.content}">
-            <td><a th:href="@{/whisper/{id}(id=${whisper.id})}"><p th:text="${whisper.title}"></p></a></td>
-        </tr>
-    </table>
-
+<div class="container">
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>悄悄话列表</td>
+            </tr>
+            </thead>
+            <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
+            <tr th:each="whisper:${page.content}">
+                <td><a th:href="@{/whisper/{id}(id=${whisper.id})}"><p th:text="${whisper.title}"></p></a></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td><p><a th:href="@{/whisper/}">首页</a></p></td>
+                <td th:switch="${page.pageable.pageNumber}">
+                    <p th:case="0">上一页</p>
+                    <p th:case="*"><a th:href="@{/whisper/(page=${(page.pageable.pageNumber)-1})}">上一页</a></p>
+                </td>
+                <td><p th:text="' 第'+${page.pageable.pageNumber+1}+'页 '"></p></td>
+                <td>
+                    <p th:if="${page.last}">下一页</p>
+                    <p th:if="not ${page.last}"><a th:href="@{/whisper/(page=${page.pageable.pageNumber+1})}">下一页</a></p>
+                </td>
+                <td><p><a th:href="@{/whisper/(page=${(page.totalPages)-1})}">尾页</a></p></td>
+            </tr>
+        </table>
+    </div>
 </div>
 
-<div>
-    <table>
-        <tr>
-            <td><a th:href="@{/whisper/}">首页</a></td>
-            <td th:switch="${page.pageable.pageNumber}">
-                <p th:case="0">上一页</p>
-                <p th:case="*"><a th:href="@{/whisper/(page=${(page.pageable.pageNumber)-1})}">上一页</a></p>
-            </td>
-            <td><p th:text="' 第'+${page.pageable.pageNumber+1}+'页 '"></p></td>
-            <td>
-                <p th:if="${page.last}">下一页</p>
-                <p th:if="not ${page.last}"><a th:href="@{/whisper/(page=${page.pageable.pageNumber+1})}">下一页</a></p>
-            </td>
-            <td><a th:href="@{/whisper/(page=${(page.totalPages)-1})}">尾页</a></td>
-        </tr>
-    </table>
-</div>
 
 </body>
 </html>
