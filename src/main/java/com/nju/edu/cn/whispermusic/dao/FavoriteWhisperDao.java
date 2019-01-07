@@ -13,4 +13,12 @@ public interface FavoriteWhisperDao extends JpaRepository<FavoriteWhisper, Long>
     @Query("select fw.whisper from FavoriteWhisper fw where fw.user.id=:userId")
     List<Whisper> getFavoriteWhisperOfUser(@Param("userId") Long userId);
 
+    int countByUserIdAndWhisperId(Long userId, Long whisperId);
+
+    void deleteByUserIdAndWhisperId(Long userId, Long whisperId);
+
+    void deleteByUserId(Long userId);
+
+    void deleteByWhisperId(Long whisperId);
+
 }

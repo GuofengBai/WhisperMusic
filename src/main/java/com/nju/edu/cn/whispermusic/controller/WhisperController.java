@@ -2,6 +2,7 @@ package com.nju.edu.cn.whispermusic.controller;
 
 import com.nju.edu.cn.whispermusic.entity.Reply;
 import com.nju.edu.cn.whispermusic.entity.Whisper;
+import com.nju.edu.cn.whispermusic.service.FavoriteWhisperService;
 import com.nju.edu.cn.whispermusic.service.ReplyService;
 import com.nju.edu.cn.whispermusic.service.WhisperService;
 import com.nju.edu.cn.whispermusic.vo.Response;
@@ -12,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/whisper")
@@ -23,6 +23,9 @@ public class WhisperController {
 
     @Autowired
     private ReplyService replyService;
+
+    @Autowired
+    private FavoriteWhisperService favoriteWhisperService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String whisperListPage(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -49,19 +52,43 @@ public class WhisperController {
     }
 
     @RequestMapping(value = "/{whisperId}", method = RequestMethod.GET)
-    public String whisperDetailPage(Model model, @PathVariable("whisperId") Long whisperId) {
+    public String whisperDetailPage(HttpSession session, Model model, @PathVariable("whisperId") Long whisperId) {
         Whisper whisper = whisperService.getWhisper(whisperId);
-        //Page<Reply> replies=replyService.getReplyList(whisperId,0);
-        //model.addAttribute("page",replies);
         model.addAttribute("whisper", whisper);
+        Long userId = (Long) session.getAttribute("userId");
+        boolean isFavoriteWhisperOfUser = favoriteWhisperService.isFavoriteWhisperOfUser(userId, whisperId);
+        model.addAttribute("isFavoriteWhisperOfUser", isFavoriteWhisperOfUser);
         return "whisperDetail";
     }
 
     @RequestMapping(value = "/{whisperId}/delete", method = RequestMethod.POST)
     @ResponseBody
-    public Response deleteWhisper(Model model, @PathVariable("whisperId") Long whisperId) {
+    public Response deleteWhisper(@PathVariable("whisperId") Long whisperId) {
         whisperService.deleteWhisper(whisperId);
         return new Response<>("OK!", "delete whisper-" + whisperId + " successfully.", "");
+    }
+
+    @RequestMapping(value = "/{whisperId}/favorite", method = RequestMethod.POST)
+    @ResponseBody
+    public Response favoriteWhisper(HttpSession session, @PathVariable("whisperId") Long whisperId) {
+        Long userId = (Long) session.getAttribute("userId");
+        favoriteWhisperService.favorite(userId, whisperId);
+        return new Response<>("OK!", "user-" + userId + " favorite whisper-" + whisperId + " successfully.", "");
+    }
+
+    @RequestMapping(value = "/{whisperId}/unfavorite", method = RequestMethod.POST)
+    @ResponseBody
+    public Response unfavoriteWhisper(HttpSession session, @PathVariable("whisperId") Long whisperId) {
+        Long userId = (Long) session.getAttribute("userId");
+        favoriteWhisperService.unfavorite(userId, whisperId);
+        return new Response<>("OK!", "user-" + userId + " unfavorite whisper-" + whisperId + " successfully.", "");
+    }
+
+    @RequestMapping(value = "/{whisperId}/like", method = RequestMethod.POST)
+    @ResponseBody
+    public Response likeWhisper(@PathVariable("whisperId") Long whisperId) {
+        whisperService.addLikes(whisperId);
+        return new Response<>("OK!", "add likes of whisper-" + whisperId + " successfully.", "");
     }
 
     @RequestMapping(value = "/{whisperId}/replies/", method = RequestMethod.POST)

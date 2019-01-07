@@ -32,4 +32,15 @@ public class ReplyServiceImpl implements ReplyService {
     public Page<Reply> getReplyList(Long whisperId, Integer page) {
         return null;
     }
+
+    @Override
+    public void addLikes(Long id) {
+        replyDao.addLikes(id);
+    }
+
+    @Override
+    public void deleteReply(Long id) {
+        replyDao.deleteById(id);
+    }
+
 }

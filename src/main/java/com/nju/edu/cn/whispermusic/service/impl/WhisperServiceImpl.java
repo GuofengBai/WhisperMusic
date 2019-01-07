@@ -1,5 +1,6 @@
 package com.nju.edu.cn.whispermusic.service.impl;
 
+import com.nju.edu.cn.whispermusic.dao.FavoriteWhisperDao;
 import com.nju.edu.cn.whispermusic.dao.WhisperDao;
 import com.nju.edu.cn.whispermusic.entity.User;
 import com.nju.edu.cn.whispermusic.entity.Whisper;
@@ -18,6 +19,9 @@ public class WhisperServiceImpl implements WhisperService {
 
     @Autowired
     private WhisperDao whisperDao;
+
+    @Autowired
+    private FavoriteWhisperDao favoriteWhisperDao;
 
     private static Integer pageSize = 20;
 
@@ -54,5 +58,11 @@ public class WhisperServiceImpl implements WhisperService {
     @Override
     public void deleteWhisper(Long id) {
         whisperDao.deleteById(id);
+        favoriteWhisperDao.deleteByWhisperId(id);
+    }
+
+    @Override
+    public void addLikes(Long id) {
+        whisperDao.addLikes(id);
     }
 }

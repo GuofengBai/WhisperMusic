@@ -15,4 +15,6 @@ public interface WhisperService {
 
     void deleteWhisper(Long id);
 
+    void addLikes(Long id);
+
 }

@@ -9,4 +9,8 @@ public interface ReplyService {
 
     Page<Reply> getReplyList(Long whisperId, Integer page);
 
+    void addLikes(Long id);
+
+    void deleteReply(Long id);
+
 }
