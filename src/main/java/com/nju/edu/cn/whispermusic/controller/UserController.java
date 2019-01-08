@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +43,13 @@ public class UserController {
         Page<Whisper> whisperPage = whisperService.getWhisperListOfUser(userId, page);
         model.addAttribute("page", whisperPage);
         return "whisperManage";
+    }
+
+    @RequestMapping(value = "/whisper/{whisperId}", method = RequestMethod.GET)
+    public String whisperReplyManagePage(HttpSession session, Model model,  @PathVariable("whisperId") Long whisperId) {
+        Whisper whisper = whisperService.getWhisper(whisperId);
+        model.addAttribute("whisper", whisper);
+        return "replyManage";
     }
 
     @RequestMapping(value = "/FavoriteWhisper", method = RequestMethod.GET)

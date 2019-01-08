@@ -4,7 +4,7 @@ function delReply(id){
         return;
     }
     $.ajax({
-        url : '/whisper/'+id+'/delete',
+        url : '/reply/'+id+'/delete',
         data : {
         },
         dataType : 'json',
@@ -27,7 +27,7 @@ function upReply(id){
         return;
     }
     $.ajax({
-        url : '/whisper/'+id+'/delete',
+        url : '/reply/'+id+'/delete',
         data : {
         },
         dataType : 'json',

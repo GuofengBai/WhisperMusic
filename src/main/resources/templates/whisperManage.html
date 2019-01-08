@@ -29,7 +29,7 @@
             </thead>
             <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
             <tr th:each="whisper:${page.content}">
-                <td><a th:href="@{/whisper/{id}(id=${whisper.id})}"><p th:text="${whisper.title}"></p></a></td>
+                <td><a th:href="@{/user/whisper/{id}(id=${whisper.id})}"><p th:text="${whisper.title}"></p></a></td>
                 <td><button class="btn btn-danger" type="button" th:onclick="'javascript:delWhisper('+${whisper.id}+')'">删除</button></td>
             </tr>
         </table>

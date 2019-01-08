@@ -4,7 +4,7 @@ function delCollect(id){
         return;
     }
     $.ajax({
-        url : '/whisper/'+id+'/delete',
+        url : '/whisper/'+id+'/unfavorite',
         data : {
         },
         dataType : 'json',

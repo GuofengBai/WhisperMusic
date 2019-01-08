@@ -22,8 +22,6 @@
         <h2 th:text="${whisper.title}">标题</h2>
         <br>
 
-        <p th:text="${whisper.date}">发表于：</p>
-
 
     </div>
 
@@ -41,7 +39,7 @@
                 <td>操作</td>
             </tr>
             <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
-            <tr th:each="reply:${page.content}">
+            <tr th:each="reply:${whisper.replies}">
                 <td>
                     <p th:text="${reply.content}"></p>
                 </td>

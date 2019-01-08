@@ -27,7 +27,7 @@ public class WhisperServiceImpl implements WhisperService {
 
     @Override
     public Page<Whisper> getWhisperList(Integer page) {
-        Sort sort = new Sort(Sort.Direction.DESC, "like");
+        Sort sort = new Sort(Sort.Direction.DESC, "likes");
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         return whisperDao.findAll(pageable);
     }
