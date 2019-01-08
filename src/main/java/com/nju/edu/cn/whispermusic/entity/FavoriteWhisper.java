@@ -1,14 +1,12 @@
 package com.nju.edu.cn.whispermusic.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class FavoriteWhisper {
 
+    @Id
     @GeneratedValue
     private Long id;
 

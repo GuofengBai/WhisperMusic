@@ -41,10 +41,15 @@
             <p>回复列表：</p>
 
             <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
-            <tr th:each="reply:${page.content}">
+            <tr th:each="reply:${whisper.replies}">
                 <td>
+
                     <p th:text="${reply.content}">假装有一小段回复内容，假装有一小段回复内容，假装有一小段回复内容</p>
+
                     <p th:text="${reply.date}">回复于：</p>
+                    <button class="btn btn-success" type="button" id="likeBtn" th:onclick="'javascript:Ilike('+${reply.id}+')'">点赞</button>
+                    <button class="btn btn-success" type="button" id="favouriteBtn" th:onclick="'javascript:favourite('+${reply.id}+')'">收藏</button>
+
                 </td>
 
             </tr>
@@ -69,5 +74,6 @@
     </div>
 
 </div>
+<script src="/js/whisper_detail.js"></script>
 </body>
 </html>
