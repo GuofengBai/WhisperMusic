@@ -25,22 +25,34 @@
         <h2 th:text="${whisper.title}">标题</h2>
         <br>
 
-        <p th:text="${whisper.date}">发表于：</p>
+        <p th:text="${#dates.format(whisper.date,'yyyy-MM-dd hh:mm:ss')}">发表于：</p>
+        <br>
+        <ul class="menu">
+            <li style="display: inline">
+                <!---IF THE WHISPER IS USER's FAVOURITE--->
 
-        <!---IF THE WHISPER IS USER's FAVOURITE--->
-        <br>
-        <div th:if="${isFavoriteWhisperOfUser}">
-            <button class="btn btn-success" type="button" id="favouriteBtn" style="width: 100px;"
-                    th:onclick="'javascript:favourite('+${reply.id}+')'">收藏
-            </button>
-        </div>
-        <!---ELSE--->
-        <br>
-        <div th:unless="${isFavoriteWhisperOfUser}">
-            <button class="btn btn-success" type="button" id="favouriteBtn" style="width: 100px;"
-                    th:onclick="'javascript:unfavourite('+${reply.id}+')'">取消收藏
-            </button>
-        </div>
+                <div th:if="!${isFavoriteWhisperOfUser}">
+                    <button class="btn btn-success" type="button" id="favouriteBtn" style="width: 100px;"
+                            th:onclick="'javascript:favourite('+${whisper.id}+')'">收藏
+                    </button>
+                </div>
+                <!---ELSE--->
+
+                <div th:unless="!${isFavoriteWhisperOfUser}">
+                    <button class="btn btn-success" type="button" id="unfavouriteBtn" style="width: 100px;"
+                            th:onclick="'javascript:unfavourite('+${whisper.id}+')'">取消收藏
+                    </button>
+                </div>
+            </li>
+            <li style="display: inline">
+
+                <button class="btn btn-danger" type="button" id="whisperlikeBtn" style="width: 60px;"
+                        th:onclick="'javascript:whisperlike('+${whisper.id}+')'">赞
+                </button>
+            </li>
+        </ul>
+
+
     </div>
 
     <div class="col-lg-8" id="whisperDetail">
@@ -63,10 +75,10 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <button class="btn btn-danger" type="button" id="likeBtn" style="width: 60px;"
-                                        th:onclick="'javascript:Ilike('+${reply.id}+')'">赞
+                                        th:onclick="'javascript:replylike('+${reply.id}+')'">赞
                                 </button>
                             </div>
-                            <p th:text="${reply.date}" class="text-right">回复于：</p>
+                            <p th:text="${#dates.format(reply.date,'yyyy-MM-dd hh:mm:ss')}" class="text-right">回复于：</p>
 
                         </div>
                     </div>
@@ -80,7 +92,7 @@
 
     </div>
     <div class="col-lg-8">
-        <form th:action="@{/whisper/${whisper.id}/replies/}" method="post" name="newWhisperReply">
+        <form th:action="@{/whisper/{id}/replies/(id=${whisper.id})}" method="post" name="newWhisperReply">
 
 
             <label>回复悄悄话</label>
