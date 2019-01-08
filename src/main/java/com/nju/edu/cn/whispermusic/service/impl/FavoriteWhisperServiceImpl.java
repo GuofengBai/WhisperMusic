@@ -6,6 +6,9 @@ import com.nju.edu.cn.whispermusic.entity.User;
 import com.nju.edu.cn.whispermusic.entity.Whisper;
 import com.nju.edu.cn.whispermusic.service.FavoriteWhisperService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +18,8 @@ public class FavoriteWhisperServiceImpl implements FavoriteWhisperService {
 
     @Autowired
     private FavoriteWhisperDao favoriteWhisperDao;
+
+    private static Integer pageSize = 20;
 
     @Override
     public boolean isFavoriteWhisperOfUser(Long userId, Long whisperId) {
@@ -43,6 +48,12 @@ public class FavoriteWhisperServiceImpl implements FavoriteWhisperService {
     @Override
     public void unfavorite(Long userId, Long whisperId) {
         favoriteWhisperDao.deleteByUserIdAndWhisperId(userId, whisperId);
+    }
+
+    @Override
+    public Page<Whisper> favoriteWhisperOfUser(Long userId, Integer page) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return favoriteWhisperDao.getFavoriteWhisperOfUser(userId, pageable);
     }
 
 }

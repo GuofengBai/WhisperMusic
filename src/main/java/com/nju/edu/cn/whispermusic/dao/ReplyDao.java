@@ -14,11 +14,11 @@ public interface ReplyDao extends JpaRepository<Reply, Long> {
 
     Page<Reply> findAllByWhisperId(Long id, Pageable pageable);
 
-    List<Reply> findTop5ByWhisperIdOrderByLikeDesc(Long whisperId);
+    List<Reply> findTop5ByWhisperIdOrderByLikesDesc(Long whisperId);
 
     List<Reply> findByWhisperIdAndStickedIsTrue(Long whisperId);
 
-    @Query("update Reply r set r.like = r.like+1 where r.id=:id")
+    @Query("update Reply r set r.likes = r.likes+1 where r.id=:id")
     @Modifying
     void addLikes(@Param("id") Long id);
 
