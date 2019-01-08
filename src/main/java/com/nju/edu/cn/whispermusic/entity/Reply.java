@@ -25,9 +25,9 @@ public class Reply{
 
     private String content;
 
-    private Integer like = 0;
+    private Integer likes = 0;
 
-    private boolean isSticked = false;
+    private boolean sticked = false;
 
     public Reply() {
         this.date = new Date();
@@ -78,20 +78,20 @@ public class Reply{
         this.content = content;
     }
 
-    public Integer getLike() {
-        return like;
+    public Integer getLikes() {
+        return likes;
     }
 
-    public void setLike(Integer like) {
-        this.like = like;
+    public void setLikes(Integer likes) {
+        this.likes = likes;
     }
 
     public boolean isSticked() {
-        return isSticked;
+        return sticked;
     }
 
     public void setSticked(boolean sticked) {
-        isSticked = sticked;
+        this.sticked = sticked;
     }
 
     @Override

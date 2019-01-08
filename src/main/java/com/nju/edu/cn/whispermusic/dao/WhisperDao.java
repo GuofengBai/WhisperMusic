@@ -14,7 +14,7 @@ public interface WhisperDao extends JpaRepository<Whisper, Long> {
 
     Page<Whisper> findAllByOwnerId(Long id, Pageable pageable);
 
-    @Query("update Whisper w set w.like = w.like+1 where w.id=:id")
+    @Query("update Whisper w set w.likes = w.likes+1 where w.id=:id")
     @Modifying
     void addLikes(@Param("id") Long id);
 

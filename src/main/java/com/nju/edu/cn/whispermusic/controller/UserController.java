@@ -1,6 +1,7 @@
 package com.nju.edu.cn.whispermusic.controller;
 
 import com.nju.edu.cn.whispermusic.entity.Whisper;
+import com.nju.edu.cn.whispermusic.service.FavoriteWhisperService;
 import com.nju.edu.cn.whispermusic.service.ReplyService;
 import com.nju.edu.cn.whispermusic.service.UserService;
 import com.nju.edu.cn.whispermusic.service.WhisperService;
@@ -27,6 +28,9 @@ public class UserController {
     @Autowired
     private ReplyService replyService;
 
+    @Autowired
+    private FavoriteWhisperService favoriteWhisperService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String userHomePage(HttpSession session) {
         return "userHome";
@@ -38,6 +42,14 @@ public class UserController {
         Page<Whisper> whisperPage = whisperService.getWhisperListOfUser(userId, page);
         model.addAttribute("page", whisperPage);
         return "whisperManage";
+    }
+
+    @RequestMapping(value = "/FavoriteWhisper", method = RequestMethod.GET)
+    public String favoriteWhisperPage(HttpSession session, Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        Long userId = (Long) session.getAttribute("userId");
+        Page<Whisper> whisperPage = favoriteWhisperService.favoriteWhisperOfUser(userId, page);
+        model.addAttribute("page", whisperPage);
+        return "favoriteWhisper";
     }
 
 }
