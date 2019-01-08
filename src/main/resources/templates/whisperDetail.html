@@ -20,47 +20,44 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
 
         <h2 th:text="${whisper.title}">标题</h2>
         <br>
 
         <p th:text="${#dates.format(whisper.date,'yyyy-MM-dd hh:mm:ss')}">发表于：</p>
         <br>
-        <ul class="menu">
-            <li style="display: inline">
-                <!---IF THE WHISPER IS USER's FAVOURITE--->
 
-                <div th:if="!${isFavoriteWhisperOfUser}">
-                    <button class="btn btn-success" type="button" id="favouriteBtn" style="width: 100px;"
-                            th:onclick="'javascript:favourite('+${whisper.id}+')'">收藏
-                    </button>
-                </div>
-                <!---ELSE--->
 
-                <div th:unless="!${isFavoriteWhisperOfUser}">
-                    <button class="btn btn-success" type="button" id="unfavouriteBtn" style="width: 100px;"
-                            th:onclick="'javascript:unfavourite('+${whisper.id}+')'">取消收藏
-                    </button>
-                </div>
-            </li>
-            <li style="display: inline">
+        <!---IF THE WHISPER IS USER's FAVOURITE--->
 
-                <button class="btn btn-danger" type="button" id="whisperlikeBtn" style="width: 60px;"
-                        th:onclick="'javascript:whisperlike('+${whisper.id}+')'">赞
-                </button>
-            </li>
-        </ul>
+        <div th:if="!${isFavoriteWhisperOfUser}">
+            <button class="btn btn-success" type="button" id="favouriteBtn" style="width: 100px;"
+                    th:onclick="'javascript:favourite('+${whisper.id}+')'">收藏
+            </button>
+        </div>
+        <!---ELSE--->
+
+        <div th:unless="!${isFavoriteWhisperOfUser}">
+            <button class="btn btn-success" type="button" id="unfavouriteBtn" style="width: 100px;"
+                    th:onclick="'javascript:unfavourite('+${whisper.id}+')'">取消收藏
+            </button>
+        </div>
+        <br>
+
+        <button class="btn btn-danger" type="button" id="whisperlikeBtn" style="width: 60px;"
+                th:onclick="'javascript:whisperlike('+${whisper.id}+')'" th:text="${whisper.likes}+'赞'">
+        </button>
 
 
     </div>
 
-    <div class="col-lg-8" id="whisperDetail">
+    <div class="col-lg-12" id="whisperDetail">
         <hr>
         <p th:text="${whisper.content}">&emsp;&emsp;这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容，这里假装有一大段悄悄话内容</p>
 
     </div>
-    <div class="col-lg-8" id="replys">
+    <div class="col-lg-12" id="replys">
         <hr>
         <table class="table table-hover">
             <p>回复列表：</p>
@@ -68,18 +65,21 @@
             <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
             <tr th:each="reply:${whisper.replies}">
                 <td>
-
-                    <p th:text="${reply.content}">假装有一小段回复内容，假装有一小段回复内容，假装有一小段回复内容</p>
-
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
+                        <p th:text="${reply.content}">假装有一小段回复内容，假装有一小段回复内容，假装有一小段回复内容</p>
+                    </div>
+                    <div class="col-lg-12">
                         <div class="row">
+
                             <div class="col-lg-4">
                                 <button class="btn btn-danger" type="button" id="likeBtn" style="width: 60px;"
-                                        th:onclick="'javascript:replylike('+${reply.id}+')'">赞
+                                        th:onclick="'javascript:replylike('+${reply.id}+')'" th:text="${reply.likes}+'赞'">
                                 </button>
                             </div>
-                            <p th:text="${#dates.format(reply.date,'yyyy-MM-dd hh:mm:ss')}" class="text-right">回复于：</p>
-
+                            <div class="col-lg-8">
+                                <p th:text="${#dates.format(reply.date,'yyyy-MM-dd hh:mm:ss')}" class="text-right">
+                                    2019-01-08 10:06:45</p>
+                            </div>
                         </div>
                     </div>
 
@@ -91,7 +91,7 @@
         <hr>
 
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <form th:action="@{/whisper/{id}/replies/(id=${whisper.id})}" method="post" name="newWhisperReply">
 
 
