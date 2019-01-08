@@ -27,7 +27,20 @@
 
         <p th:text="${whisper.date}">发表于：</p>
 
-
+        <!---IF THE WHISPER IS USER's FAVOURITE--->
+        <br>
+        <div th:if="${isFavoriteWhisperOfUser}">
+            <button class="btn btn-success" type="button" id="favouriteBtn" style="width: 100px;"
+                    th:onclick="'javascript:favourite('+${reply.id}+')'">收藏
+            </button>
+        </div>
+        <!---ELSE--->
+        <br>
+        <div th:unless="${isFavoriteWhisperOfUser}">
+            <button class="btn btn-success" type="button" id="favouriteBtn" style="width: 100px;"
+                    th:onclick="'javascript:unfavourite('+${reply.id}+')'">取消收藏
+            </button>
+        </div>
     </div>
 
     <div class="col-lg-8" id="whisperDetail">
@@ -46,9 +59,17 @@
 
                     <p th:text="${reply.content}">假装有一小段回复内容，假装有一小段回复内容，假装有一小段回复内容</p>
 
-                    <p th:text="${reply.date}">回复于：</p>
-                    <button class="btn btn-success" type="button" id="likeBtn" th:onclick="'javascript:Ilike('+${reply.id}+')'">点赞</button>
-                    <button class="btn btn-success" type="button" id="favouriteBtn" th:onclick="'javascript:favourite('+${reply.id}+')'">收藏</button>
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <button class="btn btn-danger" type="button" id="likeBtn" style="width: 60px;"
+                                        th:onclick="'javascript:Ilike('+${reply.id}+')'">赞
+                                </button>
+                            </div>
+                            <p th:text="${reply.date}" class="text-right">回复于：</p>
+
+                        </div>
+                    </div>
 
                 </td>
 
