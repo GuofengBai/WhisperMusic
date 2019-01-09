@@ -1,5 +1,6 @@
 package com.nju.edu.cn.whispermusic.controller;
 
+import com.nju.edu.cn.whispermusic.entity.Reply;
 import com.nju.edu.cn.whispermusic.entity.Whisper;
 import com.nju.edu.cn.whispermusic.service.FavoriteWhisperService;
 import com.nju.edu.cn.whispermusic.service.ReplyService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -49,6 +51,13 @@ public class UserController {
     public String whisperReplyManagePage(HttpSession session, Model model,  @PathVariable("whisperId") Long whisperId) {
         Whisper whisper = whisperService.getWhisper(whisperId);
         model.addAttribute("whisper", whisper);
+        Long userId = (Long) session.getAttribute("userId");
+        boolean isFavoriteWhisperOfUser = favoriteWhisperService.isFavoriteWhisperOfUser(userId, whisperId);
+        model.addAttribute("isFavoriteWhisperOfUser", isFavoriteWhisperOfUser);
+        List<Reply> top5LikesReply = replyService.getTop5LikesReply(whisperId);
+        model.addAttribute("top5LikesReply", top5LikesReply);
+        List<Reply> stickedReply = replyService.getstickedReply(whisperId);
+        model.addAttribute("stickedReply", stickedReply);
         return "replyManage";
     }
 

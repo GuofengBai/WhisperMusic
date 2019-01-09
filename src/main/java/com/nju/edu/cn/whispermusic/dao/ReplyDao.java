@@ -26,4 +26,10 @@ public interface ReplyDao extends JpaRepository<Reply, Long> {
     @Modifying
     void stickReply(@Param("id") Long id);
 
+    @Query("update Reply r set r.sticked = false where r.id=:id")
+    @Modifying
+    void unstickReply(@Param("id") Long id);
+
+
+
 }

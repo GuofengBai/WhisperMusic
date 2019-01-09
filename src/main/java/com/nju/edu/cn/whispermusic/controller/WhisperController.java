@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/whisper")
@@ -58,6 +59,10 @@ public class WhisperController {
         Long userId = (Long) session.getAttribute("userId");
         boolean isFavoriteWhisperOfUser = favoriteWhisperService.isFavoriteWhisperOfUser(userId, whisperId);
         model.addAttribute("isFavoriteWhisperOfUser", isFavoriteWhisperOfUser);
+        List<Reply> top5LikesReply = replyService.getTop5LikesReply(whisperId);
+        model.addAttribute("top5LikesReply", top5LikesReply);
+        List<Reply> stickedReply = replyService.getstickedReply(whisperId);
+        model.addAttribute("stickedReply", stickedReply);
         return "whisperDetail";
     }
 

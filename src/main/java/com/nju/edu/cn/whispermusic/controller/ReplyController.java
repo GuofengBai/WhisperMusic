@@ -30,4 +30,18 @@ public class ReplyController {
         return new Response<>("OK!", "add likes of reply-" + replyId + " successfully.", "");
     }
 
+    @RequestMapping(value = "/{replyId}/stick", method = RequestMethod.POST)
+    @ResponseBody
+    public Response stickReply(@PathVariable("replyId") Long replyId) {
+        replyService.stickReply(replyId);
+        return new Response<>("OK!", "stick reply-" + replyId + " successfully.", "");
+    }
+
+    @RequestMapping(value = "/{replyId}/unstick", method = RequestMethod.POST)
+    @ResponseBody
+    public Response unstickReply(@PathVariable("replyId") Long replyId) {
+        replyService.unstickReply(replyId);
+        return new Response<>("OK!", "unstick reply-" + replyId + " successfully.", "");
+    }
+
 }
