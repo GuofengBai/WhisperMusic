@@ -43,8 +43,13 @@
                 <td>
                     <p th:text="${reply.content}"></p>
                 </td>
+                <td th:if="!${reply.sticked}">
+                    <button class="btn btn-success" type="button" th:onclick="'javascript:stickReply('+${reply.id}+')'">置顶</button>
+                </td>
+                <td th:unless="!${reply.sticked}">
+                    <button class="btn btn-warning" type="button" th:onclick="'javascript:unstickReply('+${reply.id}+')'">取消置顶</button>
+                </td>
                 <td>
-                    <button class="btn btn-success" type="button" th:onclick="'javascript:upReply('+${reply.id}+')'">置顶</button>
                     <button class="btn btn-danger" type="button" th:onclick="'javascript:delReply('+${reply.id}+')'">删除</button>
                 </td>
             </tr>
