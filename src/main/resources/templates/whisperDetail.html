@@ -24,8 +24,9 @@
 
         <h2 th:text="${whisper.title}">标题</h2>
         <br>
-
-        <p th:text="${#dates.format(whisper.date,'yyyy-MM-dd hh:mm:ss')}">发表于：</p>
+        <div th:with="timeZone=${T(java.util.TimeZone).getTimeZone('Asia/Shanghai')}">
+            <p th:text="${#dates.format(whisper.date,'yyyy-MM-dd hh:mm:ss')}">发表于：</p>
+        </div>
         <br>
 
 
@@ -60,8 +61,33 @@
     <div class="col-lg-12" id="replys">
         <hr>
         <table class="table table-hover">
-            <p>回复列表：</p>
+            <p>热门回复：</p>
+            <tr th:each="topReply:${top5LikesReply}">
+                <td>
+                    <div class="col-lg-12">
+                        <span th:text="${topReply.likes}+'赞'"
+                              style="float:left;margin-right: 40px;color: #c9302c"></span>
+                        <p th:text="${topReply.content}" style="float:left;"></p>
 
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-hover">
+            <p>置顶回复：</p>
+            <tr th:each="stickReply:${stickedReply}">
+                <td>
+                    <div class="col-lg-12">
+                        <p style="float:left;border: solid 1px dodgerblue;color: dodgerblue;padding-left: 2px;padding-right: 2px;margin-right: 30px">
+                            置顶</p>
+                        <p th:text="${stickReply.content}" style="float: left;"></p>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-hover">
+            <p>所有回复：</p>
             <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
             <tr th:each="reply:${whisper.replies}">
                 <td>
@@ -73,10 +99,11 @@
 
                             <div class="col-lg-4">
                                 <button class="btn btn-danger" type="button" id="likeBtn" style="width: 60px;"
-                                        th:onclick="'javascript:replylike('+${reply.id}+')'" th:text="${reply.likes}+'赞'">
+                                        th:onclick="'javascript:replylike('+${reply.id}+')'"
+                                        th:text="${reply.likes}+'赞'">
                                 </button>
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-8" th:with="timeZone=${T(java.util.TimeZone).getTimeZone('Asia/Shanghai')}">
                                 <p th:text="${#dates.format(reply.date,'yyyy-MM-dd hh:mm:ss')}" class="text-right">
                                     2019-01-08 10:06:45</p>
                             </div>
@@ -87,7 +114,7 @@
 
             </tr>
         </table>
-        <br><br>
+
         <hr>
 
     </div>
@@ -95,11 +122,12 @@
         <form th:action="@{/whisper/{id}/replies/(id=${whisper.id})}" method="post" name="newWhisperReply">
 
 
-            <label>回复悄悄话</label>
-            <input id="content" name="content" rows="3" cols="20" style="width: 640px;resize: none">
+            <label class="form-inline">回复悄悄话</label>
+            <input id="content" name="content" rows="3" cols="20" style="width: 640px;resize:none">
             <br><br>
 
-            <input id="submit" value="回 复" type="submit" class="btn btn-primary"
+
+            <input id="submit" value="回 复" type="submit" class="form-control btn btn-primary"
                    style="width: 75px;background-color: dodgerblue;color: white"><br><br>
 
 
