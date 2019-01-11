@@ -39,17 +39,25 @@
                 <td>操作</td>
             </tr>
             <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
-            <tr th:each="reply:${whisper.replies}">
+            <tr th:each="reply:${stickedReply}" >
                 <td>
                     <p th:text="${reply.content}"></p>
-                </td>
-                <td th:if="!${reply.sticked}">
-                    <button class="btn btn-success" type="button" th:onclick="'javascript:stickReply('+${reply.id}+')'">置顶</button>
                 </td>
                 <td th:unless="!${reply.sticked}">
                     <button class="btn btn-warning" type="button" th:onclick="'javascript:unstickReply('+${reply.id}+')'">取消置顶</button>
                 </td>
                 <td>
+                    <button class="btn btn-danger" type="button" th:onclick="'javascript:delReply('+${reply.id}+')'">删除</button>
+                </td>
+            </tr>
+            <tr th:each="reply:${whisper.replies}">
+                <td th:if="!${reply.sticked}">
+                    <p th:text="${reply.content}"></p>
+                </td>
+                <td th:if="!${reply.sticked}">
+                    <button class="btn btn-success" type="button" th:onclick="'javascript:stickReply('+${reply.id}+')'">置顶</button>
+                </td>
+                <td th:if="!${reply.sticked}">
                     <button class="btn btn-danger" type="button" th:onclick="'javascript:delReply('+${reply.id}+')'">删除</button>
                 </td>
             </tr>
