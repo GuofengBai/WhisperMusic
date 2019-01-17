@@ -11,7 +11,7 @@ function replylike(id){
         type : 'post',
         success: function (result) {
             location.reload(true);
-            alert('赞成功！');
+
         },
         error:function(err){
             location.reload(true);
@@ -33,7 +33,7 @@ function whisperlike(id){
         type : 'post',
         success: function (result) {
             location.reload(true);
-            alert('赞成功！');
+
         },
         error:function(err){
             location.reload(true);
@@ -55,7 +55,7 @@ function favourite(id){
         type : 'post',
         success: function (result) {
             location.reload(true);
-            alert('收藏成功！');
+
         },
         error:function(err){
             location.reload(true);
@@ -77,7 +77,7 @@ function unfavourite(id){
         type : 'post',
         success: function (result) {
             location.reload(true);
-            alert('取消收藏成功！');
+
         },
         error:function(err){
             location.reload(true);

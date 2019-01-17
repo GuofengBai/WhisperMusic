@@ -17,6 +17,7 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="navibar::navi"></div>
     <div class="col-lg-8">
         <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
         <h2 th:text="${whisper.title}">标题</h2>

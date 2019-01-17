@@ -20,12 +20,13 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="navibar::navi"></div>
     <div class="col-lg-12">
 
         <h2 th:text="${whisper.title}">标题</h2>
         <br>
         <div th:with="timeZone=${T(java.util.TimeZone).getTimeZone('Asia/Shanghai')}">
-            <p th:text="${#dates.format(whisper.date,'yyyy-MM-dd hh:mm:ss')}">发表于：</p>
+            <p th:text="${#dates.format(whisper.date)}">发表于：</p>
         </div>
         <br>
 
@@ -80,6 +81,7 @@
                     <div class="col-lg-12">
                         <p style="float:left;border: solid 1px dodgerblue;color: dodgerblue;padding-left: 2px;padding-right: 2px;margin-right: 30px">
                             置顶</p>
+                        <p th:text="${stickReply.likes}+'赞'" style="float: left;margin-right: 30px;color: #c9302c;"></p>
                         <p th:text="${stickReply.content}" style="float: left;"></p>
 
                     </div>
@@ -103,8 +105,9 @@
                                         th:text="${reply.likes}+'赞'">
                                 </button>
                             </div>
-                            <div class="col-lg-8" th:with="timeZone=${T(java.util.TimeZone).getTimeZone('Asia/Shanghai')}">
-                                <p th:text="${#dates.format(reply.date,'yyyy-MM-dd hh:mm:ss')}" class="text-right">
+                            <div class="col-lg-8"
+                                 th:with="timeZone=${T(java.util.TimeZone).getTimeZone('Asia/Shanghai')}">
+                                <p th:text="${#dates.format(reply.date)}" class="text-right">
                                     2019-01-08 10:06:45</p>
                             </div>
                         </div>
