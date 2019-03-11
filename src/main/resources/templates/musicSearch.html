@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="head::head('音乐搜索')">
+    <meta charset="UTF-8">
+    <title th:text="音乐搜索"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="navibar::navi"></div>
+    <div class="col-lg-8">
+        <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
+        <h2>音乐搜索</h2>
+        <br>
+
+
+    </div>
+
+    <div class="col-lg-8" id="whisperDetail">
+        <hr>
+        <form>
+            <label>关键字&emsp;</label>
+            <input id="keyword" name="keyword" type="text">
+            <button class="btn btn-primary" type="button" th:onclick="'javascript:searchMusic()'">搜索</button>
+        </form>
+
+    </div>
+    <div class="col-lg-8" id="replys">
+        <hr>
+        <table class="table table-hover" id="songtable">
+            <thead>
+            <tr>
+                <td>音乐列表</td>
+                <td>操作</td>
+            </tr>
+            <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
+            <tr th:each="song:${songs}" >
+                <td>
+                    <p th:text="${song.name}"></p>
+                </td>
+
+                <td>
+                    <a th:href="@{/newwhisper/{id}/{name}(id=${song.id},name=${song.name})}"><p th:text="创建悄悄话"></p></a>
+                </td>
+            </tr>
+        </table>
+        <br><br>
+        <hr>
+
+    </div>
+
+</div>
+
+<script src="/js/music_search.js"></script>
+</body>
+</html>

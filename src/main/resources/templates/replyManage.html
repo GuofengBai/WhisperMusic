@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="head::head(${whisper.title})">
     <meta charset="UTF-8">
-    <title th:text="whisper.title"></title>
+    <title th:text="${whisper.title}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
