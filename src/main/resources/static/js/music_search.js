@@ -8,11 +8,10 @@ function searchMusic(){
         dataType : 'json',
         type : 'get',
         success: function (result) {
-            songs=result.songs;
-            var str="";
-            for(song in songs){
-                str=str+'<tr><td><p>'+song.name+'</p>'+'</td>' +'</tr>' ;
-                $("#songtable").html(str)
+            var songs=result.result.songs;
+            for(var i in songs){
+                var str='<tr><td>'+songs[i].name+' - '+songs[i].artists[0].name+'</td>' +'</tr>' ;
+                $("#songtable").append(str)
             }
 
         },
