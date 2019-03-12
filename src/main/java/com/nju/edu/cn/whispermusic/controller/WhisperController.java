@@ -52,6 +52,14 @@ public class WhisperController {
         return "newWhisper";
     }
 
+    @RequestMapping(value = "/new/{musicId}/{musicName}", method = RequestMethod.GET)
+    public String musicCreateWhisperPage(HttpSession session, Model model, @PathVariable("musicId") String musicId,@PathVariable("musicName") String musicIName) {
+        String src="//music.163.com/outchain/player?type=2&id="+musicId+"&auto=0&height=66";
+        model.addAttribute("src",src);
+        return "newWhisper";
+    }
+
+
     @RequestMapping(value = "/{whisperId}", method = RequestMethod.GET)
     public String whisperDetailPage(HttpSession session, Model model, @PathVariable("whisperId") Long whisperId) {
         Whisper whisper = whisperService.getWhisper(whisperId);
