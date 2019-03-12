@@ -29,6 +29,12 @@ public class Reply{
 
     private boolean sticked = false;
 
+    private Boolean hasMusic = false;
+
+    private String musicName = "null";
+
+    private String musicId = "null";
+
     public Reply() {
         this.date = new Date();
     }
@@ -36,6 +42,14 @@ public class Reply{
     public Reply(String content) {
         this.date = new Date();
         this.content = content;
+    }
+
+    public Reply(String content, String musicName, String musicId) {
+        this.content = content;
+        this.musicName = musicName;
+        this.musicId = musicId;
+        this.date = new Date();
+        this.hasMusic = true;
     }
 
     public Long getId() {
@@ -92,6 +106,30 @@ public class Reply{
 
     public void setSticked(boolean sticked) {
         this.sticked = sticked;
+    }
+
+    public Boolean getHasMusic() {
+        return hasMusic;
+    }
+
+    public void setHasMusic(Boolean hasMusic) {
+        this.hasMusic = hasMusic;
+    }
+
+    public String getMusicName() {
+        return musicName;
+    }
+
+    public void setMusicName(String musicName) {
+        this.musicName = musicName;
+    }
+
+    public String getMusicId() {
+        return musicId;
+    }
+
+    public void setMusicId(String musicId) {
+        this.musicId = musicId;
     }
 
     @Override

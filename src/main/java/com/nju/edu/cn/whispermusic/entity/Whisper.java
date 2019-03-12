@@ -23,6 +23,12 @@ public class Whisper{
 
     private Integer likes = 0;
 
+    private Boolean hasMusic = false;
+
+    private String musicName = "null";
+
+    private String musicId = "null";
+
     @JsonIgnore
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH})
     private User owner;
@@ -38,6 +44,15 @@ public class Whisper{
         this.title = title;
         this.content = content;
         this.date = new Date();
+    }
+
+    public Whisper(String title, String content, String musicName, String musicId) {
+        this.title = title;
+        this.content = content;
+        this.musicName = musicName;
+        this.musicId = musicId;
+        this.date = new Date();
+        this.hasMusic = true;
     }
 
     public Long getId() {
@@ -78,6 +93,30 @@ public class Whisper{
 
     public void setLikes(Integer likes) {
         this.likes = likes;
+    }
+
+    public Boolean getHasMusic() {
+        return hasMusic;
+    }
+
+    public void setHasMusic(Boolean hasMusic) {
+        this.hasMusic = hasMusic;
+    }
+
+    public String getMusicName() {
+        return musicName;
+    }
+
+    public void setMusicName(String musicName) {
+        this.musicName = musicName;
+    }
+
+    public String getMusicId() {
+        return musicId;
+    }
+
+    public void setMusicId(String musicId) {
+        this.musicId = musicId;
     }
 
     public User getOwner() {
