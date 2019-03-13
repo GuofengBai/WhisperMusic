@@ -34,11 +34,23 @@
 
             <textarea id="content" name="content" rows="3" cols="20"
                       style="width: 640px;resize: none"></textarea><br><br>
-            <input id="hasMusic" name="hasMusic" type="text" value="false" style="display: none">
 
-            <input id="musicId" name="musicId" type="text" value="null" style="display: none">
+            <div th:if="${src}!=null">
 
-            <input id="musicName" name="musicName" type="text" value="null" style="display: none">
+                <input id="hasMusic" name="hasMusic" type="text" value="true" style="display: none">
+
+                <input id="musicId" name="musicId" type="text" th:value=${musicId} style="display: none">
+
+                <input id="musicName" name="musicName" type="text" th:value=${musicName} style="display: none">
+
+            </div>
+            <div th:unless="${src}!=null">
+                <input id="hasMusic" name="hasMusic" type="text" value="false" style="display: none">
+
+                <input id="musicId" name="musicId" type="text" value="null" style="display: none">
+
+                <input id="musicName" name="musicName" type="text" value="null" style="display: none">
+            </div>
 
             <input id="submit" value="发 表" type="submit" class="btn btn-primary"
                    style="width: 75px;background-color: dodgerblue;color: white"><br><br>
@@ -49,11 +61,14 @@
                     <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
                             th:src="${src}"></iframe>
                 </div>
+                <script>
+                    $("#hasMusic").attr("value", "true");
+                </script>
             </div>
 
             <div th:unless="${src}!=null">
                 <div>不是跳转过来的</div>
-                <div class="col-lg-8" id="whisperDetail">
+                <div class="col-lg-8">
                     <hr>
                     <form>
                         <label>关键字&emsp;</label>
@@ -63,7 +78,7 @@
                     </form>
 
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-8" style="max-height:300px;overflow:auto;">
                     <table class="table table-hover" id="songtable">
                         <thead>
                         <tr>
@@ -71,18 +86,6 @@
                             <td>操作</td>
                         </tr>
                         </thead>
-                        <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
-                        <!--
-                        <tr th:each="song:${songs}" >
-                            <td>
-                                <p th:text="${song.name}"></p>
-                            </td>
-
-                            <td>
-                                <a th:href="@{/newwhisper/{id}/{name}(id=${song.id},name=${song.name})}"><p th:text="创建悄悄话"></p></a>
-                            </td>
-                        </tr>
-                        -->
                     </table>
                     <br><br>
                     <hr>
@@ -90,15 +93,24 @@
                 </div>
 
                 <div>
-                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src=""
+                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
+                            src=""
                             id="music_player"></iframe>
                 </div>
+
+                <label id="musicInfo" content="">将音乐加入至悄悄话</label>
             </div>
         </form>
+
+
+
+
+
     </div>
 </div>
+</div>
 
-<script src="/js/music_search.js"></script>
+<script src="/js/newwhisper_musicsearch.js"></script>
 <div class="copyright"></div>
 </body>
 </html>

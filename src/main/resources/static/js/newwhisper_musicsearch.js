@@ -17,7 +17,6 @@ function searchMusic() {
                 if (songs[i].fee === 0){
                     var str = '<td>' + songs[i].name + ' - ' + songs[i].artists[0].name + '</td>';
                     str = str + '<td>' + '<button class=\"btn btn-primary\" type=\"button\" onclick=\"javascript:musicChange(' + songs[i].id + ')\">播放</button>' + '</td>';
-                    str = str + '<td>' + '<a href=\"/whisper/new/' + songs[i].id + '/' + songs[i].name + '\">' + '<button class=\"btn btn-primary\" type=\"button\">创建悄悄话</button>' + '</a>' + '</td>';
                     str = '<tr>' + str + '</tr>';
                     $("#songtable").append(str)
                 }
@@ -35,5 +34,7 @@ function searchMusic() {
 function musicChange(id) {
     var url = "//music.163.com/outchain/player?type=2&id=" + id + "&auto=1&&height=66";
     document.getElementById('music_player').src = url;
+    document.getElementById('musicInfo').content=id;
+
 
 }

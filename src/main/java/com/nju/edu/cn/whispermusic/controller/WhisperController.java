@@ -39,7 +39,7 @@ public class WhisperController {
     public String createWhisper(HttpSession session, String title, String content, boolean hasMusic, String musicId, String musicName) {
         Whisper whisper;
         if (hasMusic) {
-            whisper = new Whisper(title, content, musicId, musicName);
+            whisper = new Whisper(title, content, musicName, musicId);
         } else {
             whisper = new Whisper(title, content);
         }
@@ -58,10 +58,10 @@ public class WhisperController {
     }
 
     @RequestMapping(value = "/new/{musicId}/{musicName}", method = RequestMethod.GET)
-    public String musicCreateWhisperPage(HttpSession session, Model model, @PathVariable("musicId") String musicId, @PathVariable("musicName") String musicIName) {
+    public String musicCreateWhisperPage(HttpSession session, Model model, @PathVariable("musicId") String musicId, @PathVariable("musicName") String musicName) {
         String src = "//music.163.com/outchain/player?type=2&id=" + musicId + "&auto=0&height=66";
         model.addAttribute("musicId",musicId);
-        model.addAttribute("musicName",musicIName);
+        model.addAttribute("musicName",musicName);
         model.addAttribute("src", src);
         return "newWhisper";
     }
