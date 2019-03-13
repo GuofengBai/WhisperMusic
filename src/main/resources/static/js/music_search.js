@@ -33,7 +33,7 @@ function searchMusic() {
 }
 
 function musicChange(id) {
-    var url = "//music.163.com/outchain/player?type=2&id=" + id + "&auto=1&height=32";
+    var url = "//music.163.com/outchain/player?type=2&id=" + id + "&auto=1&&height=66";
     document.getElementById('music_player').src = url;
 
 }
