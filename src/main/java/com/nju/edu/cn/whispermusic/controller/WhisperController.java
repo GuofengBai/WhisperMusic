@@ -36,8 +36,13 @@ public class WhisperController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String createWhisper(HttpSession session, String title, String content) {
-        Whisper whisper = new Whisper(title, content);
+    public String createWhisper(HttpSession session, String title, String content, boolean hasMusic, String musicId, String musicName) {
+        Whisper whisper;
+        if (hasMusic) {
+            whisper = new Whisper(title, content, musicId, musicName);
+        } else {
+            whisper = new Whisper(title, content);
+        }
         Long userId = (Long) session.getAttribute("userId");
         whisper = whisperService.createWhisper(userId, whisper);
         if (whisper != null) {
@@ -53,9 +58,11 @@ public class WhisperController {
     }
 
     @RequestMapping(value = "/new/{musicId}/{musicName}", method = RequestMethod.GET)
-    public String musicCreateWhisperPage(HttpSession session, Model model, @PathVariable("musicId") String musicId,@PathVariable("musicName") String musicIName) {
-        String src="//music.163.com/outchain/player?type=2&id="+musicId+"&auto=0&height=66";
-        model.addAttribute("src",src);
+    public String musicCreateWhisperPage(HttpSession session, Model model, @PathVariable("musicId") String musicId, @PathVariable("musicName") String musicIName) {
+        String src = "//music.163.com/outchain/player?type=2&id=" + musicId + "&auto=0&height=66";
+        model.addAttribute("musicId",musicId);
+        model.addAttribute("musicName",musicIName);
+        model.addAttribute("src", src);
         return "newWhisper";
     }
 

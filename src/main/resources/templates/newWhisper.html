@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       lang="zh-CN">
-<head  th:replace="head::head('新建悄悄话')">
+<head th:replace="head::head('新建悄悄话')">
     <title>新建悄悄话</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="../static/css/default.css"  rel="stylesheet">
+    <link href="../static/css/default.css" rel="stylesheet">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -29,19 +29,76 @@
     <div class="col-lg-8">
         <form action="/whisper/" method="post" name="newWhisper">
             <br>
-            <input id="title" name="title" type="text" placeholder="你有什么想分享的心情" style="width:640px;height: 30px"><br><br>
+            <input id="title" name="title" type="text" placeholder="你有什么想分享的心情"
+                   style="width:640px;height: 30px"><br><br>
 
-            <textarea id="content" name="content" rows="3" cols="20" style="width: 640px;resize: none"></textarea><br><br>
+            <textarea id="content" name="content" rows="3" cols="20"
+                      style="width: 640px;resize: none"></textarea><br><br>
+            <input id="hasMusic" name="hasMusic" type="text" value="false" style="display: none">
 
-            <input id="submit" value="发 表" type="submit" class="btn btn-primary" style="width: 75px;background-color: dodgerblue;color: white"><br><br>
+            <input id="musicId" name="musicId" type="text" value="null" style="display: none">
 
-            <div>
-                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 th:src="${src}"></iframe>
+            <input id="musicName" name="musicName" type="text" value="null" style="display: none">
+
+            <input id="submit" value="发 表" type="submit" class="btn btn-primary"
+                   style="width: 75px;background-color: dodgerblue;color: white"><br><br>
+
+            <div th:if="${src}!=null">
+                <div>是跳转过来的</div>
+                <div>
+                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
+                            th:src="${src}"></iframe>
+                </div>
+            </div>
+
+            <div th:unless="${src}!=null">
+                <div>不是跳转过来的</div>
+                <div class="col-lg-8" id="whisperDetail">
+                    <hr>
+                    <form>
+                        <label>关键字&emsp;</label>
+                        <input id="keyword" name="keyword" type="text">
+                        <button class="btn btn-primary" type="button" th:onclick="'javascript:searchMusic()'">搜索
+                        </button>
+                    </form>
+
+                </div>
+                <div class="col-lg-8">
+                    <table class="table table-hover" id="songtable">
+                        <thead>
+                        <tr>
+                            <td>音乐列表</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <!--/*@thymesVar id="reply" type="com.nju.edu.cn.whispermusic.entity.Reply"*/-->
+                        <!--
+                        <tr th:each="song:${songs}" >
+                            <td>
+                                <p th:text="${song.name}"></p>
+                            </td>
+
+                            <td>
+                                <a th:href="@{/newwhisper/{id}/{name}(id=${song.id},name=${song.name})}"><p th:text="创建悄悄话"></p></a>
+                            </td>
+                        </tr>
+                        -->
+                    </table>
+                    <br><br>
+                    <hr>
+
+                </div>
+
+                <div>
+                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src=""
+                            id="music_player"></iframe>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
+<script src="/js/music_search.js"></script>
 <div class="copyright"></div>
 </body>
 </html>
