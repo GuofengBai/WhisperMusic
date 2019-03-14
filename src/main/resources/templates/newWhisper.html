@@ -61,9 +61,6 @@
                     <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
                             th:src="${src}"></iframe>
                 </div>
-                <script>
-                    $("#hasMusic").attr("value", "true");
-                </script>
             </div>
 
             <div th:unless="${src}!=null">
@@ -98,7 +95,6 @@
                             id="music_player"></iframe>
                 </div>
 
-                <label id="musicInfo" content="">将音乐加入至悄悄话</label>
             </div>
         </form>
 
