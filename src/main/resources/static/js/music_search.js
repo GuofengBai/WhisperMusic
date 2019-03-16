@@ -15,9 +15,10 @@ function searchMusic() {
             var songs = result.result.songs;
             for (var i in songs) {
                 if (songs[i].fee === 0){
-                    var str = '<td>' + songs[i].name + ' - ' + songs[i].artists[0].name + '</td>';
+                    var name=songs[i].name + ' - ' + songs[i].artists[0].name;
+                    var str = '<td>' + name + '</td>';
                     str = str + '<td>' + '<button class=\"btn btn-primary\" type=\"button\" onclick=\"javascript:musicChange(' + songs[i].id + ')\">播放</button>' + '</td>';
-                    str = str + '<td>' + '<a href=\"/whisper/new/' + songs[i].id + '/' + songs[i].name + '\">' + '<button class=\"btn btn-primary\" type=\"button\">创建悄悄话</button>' + '</a>' + '</td>';
+                    str = str + '<td>' + '<a href=\"/whisper/new/' + songs[i].id + '/' + name + '\">' + '<button class=\"btn btn-primary\" type=\"button\">创建悄悄话</button>' + '</a>' + '</td>';
                     str = '<tr>' + str + '</tr>';
                     $("#songtable").append(str)
                 }
