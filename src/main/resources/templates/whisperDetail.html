@@ -28,6 +28,14 @@
         <div th:with="timeZone=${T(java.util.TimeZone).getTimeZone('Asia/Shanghai')}">
             <p th:text="${#dates.format(whisper.date)}">发表于：</p>
         </div>
+
+        <div th:if="${whisper.hasMusic}">
+            <div>
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=530 height=86
+                        th:src="'//music.163.com/outchain/player?type=2&id='+${whisper.musicId}+'&auto=1&&height=66'"
+                        id="music_player"></iframe>
+            </div>
+        </div>
         <br>
 
 

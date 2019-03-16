@@ -56,7 +56,6 @@
                    style="width: 75px;background-color: dodgerblue;color: white"><br><br>
 
             <div th:if="${src}!=null">
-                <div>是跳转过来的</div>
                 <div>
                     <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86
                             th:src="${src}"></iframe>
@@ -64,7 +63,6 @@
             </div>
 
             <div th:unless="${src}!=null">
-                <div>不是跳转过来的</div>
                 <div class="col-lg-8">
                     <hr>
                     <form>
