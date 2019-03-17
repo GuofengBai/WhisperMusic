@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="head::head('收藏')">
+    <meta charset="UTF-8">
+    <title th:text="音乐收藏"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="navibar::navi"></div>
+    <div class="col-lg-8">
+        <!--/*@thymesVar id="whisper" type="com.nju.edu.cn.whispermusic.entity.Whisper"*/-->
+        <h2>音乐收藏</h2>
+        <br>
+
+
+    </div>
+
+    <div class="col-lg-8" style="max-height:1000px;overflow:auto;">
+        <hr>
+        <table class="table table-hover" id="songtable">
+            <thead>
+            <tr>
+                <td>音乐列表</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tr th:each="music:${page.content}">
+                <td><p th:text="${music.musicName}"></p></td>
+                <td><button class="btn btn-danger" type="button" th:onclick="'javascript:unfavourite('+${music.musicId}+')'">取消收藏</button></td>
+            </tr>
+
+        </table>
+        <br><br>
+        <hr>
+
+    </div>
+
+    <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="" id="music_player"></iframe>
+    </div>
+</div>
+
+<script src="/js/favouritemusic_manage.js"></script>
+</body>
+</html>
