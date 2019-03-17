@@ -76,8 +76,10 @@
                     <div class="col-lg-12">
                         <span th:text="${topReply.likes}+'赞'"
                               style="float:left;margin-right: 40px;color: #c9302c"></span>
-                        <p th:text="${topReply.content}" style="float:left;"></p>
-
+                        <p th:text="${topReply.content}" style="float:left;margin-right: 40px;"></p>
+                        <div th:if="${topReply.hasMusic}">
+                            <p th:text="'曲目：'+${topReply.musicName}" style="float: left;"></p>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -90,7 +92,10 @@
                         <p style="float:left;border: solid 1px dodgerblue;color: dodgerblue;padding-left: 2px;padding-right: 2px;margin-right: 30px">
                             置顶</p>
                         <p th:text="${stickReply.likes}+'赞'" style="float: left;margin-right: 30px;color: #c9302c;"></p>
-                        <p th:text="${stickReply.content}" style="float: left;"></p>
+                        <p th:text="${stickReply.content}" style="float: left;margin-right: 30px;"></p>
+                        <div th:if="${stickReply.hasMusic}">
+                            <p th:text="'曲目：'+${stickReply.musicName}" style="float: left;"></p>
+                        </div>
 
                     </div>
                 </td>
@@ -107,15 +112,23 @@
                     <div class="col-lg-12">
                         <div class="row">
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-1" style="padding-top: 9px">
                                 <button class="btn btn-danger" type="button" id="likeBtn" style="width: 60px;"
                                         th:onclick="'javascript:replylike('+${reply.id}+')'"
                                         th:text="${reply.likes}+'赞'">
                                 </button>
                             </div>
-                            <div class="col-lg-8"
+                            <div th:if="${reply.hasMusic}">
+                                <div class="col-lg-6">
+                                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=530
+                                            height=86
+                                            th:src="'//music.163.com/outchain/player?type=2&id='+${reply.musicId}+'&auto=0&&height=66'"
+                                            id="music_player_inreply"></iframe>
+                                </div>
+                            </div>
+                            <div class="col-lg-4"
                                  th:with="timeZone=${T(java.util.TimeZone).getTimeZone('Asia/Shanghai')}">
-                                <p th:text="${#dates.format(reply.date)}" class="text-right">
+                                <p th:text="${#dates.format(reply.date)}" class="text-right" style="padding-top: 9px">
                                     2019-01-08 10:06:45</p>
                             </div>
                         </div>
@@ -135,6 +148,11 @@
 
             <label class="form-inline">回复悄悄话</label>
             <input id="content" name="content" rows="3" cols="20" style="width: 640px;resize:none">
+            <input id="hasMusic" name="hasMusic" type="text" value="false" style="display: none">
+
+            <input id="musicId" name="musicId" type="text" value="null" style="display: none">
+
+            <input id="musicName" name="musicName" type="text" value="null" style="display: none">
             <br><br>
 
 
@@ -144,8 +162,38 @@
 
         </form>
     </div>
+    <div class="col-lg-8">
+        <hr>
+        <form>
+            <label>关键字&emsp;</label>
+            <input id="keyword" name="keyword" type="text">
+            <button class="btn btn-primary" type="button" th:onclick="'javascript:searchMusic()'">搜索
+            </button>
+        </form>
+
+    </div>
+    <div class="col-lg-8" style="max-height:300px;overflow:auto;">
+        <table class="table table-hover" id="songtable">
+            <thead>
+            <tr>
+                <td>音乐列表</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+        </table>
+        <br><br>
+        <hr>
+
+    </div>
+
+    <div>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=530 height=86
+                src=""
+                id="music_player_reply"></iframe>
+    </div>
 
 </div>
+<script src="/js/reply_musicsearch.js"></script>
 <script src="/js/whisper_detail.js"></script>
 </body>
 </html>

@@ -112,9 +112,14 @@ public class WhisperController {
     }
 
     @RequestMapping(value = "/{whisperId}/replies/", method = RequestMethod.POST)
-    public String createReply(HttpSession session, @PathVariable("whisperId") Long whisperId, String content) {
+    public String createReply(HttpSession session, @PathVariable("whisperId") Long whisperId, String content, boolean hasMusic, String musicId, String musicName) {
         Long userId = (Long) session.getAttribute("userId");
-        Reply reply = new Reply(content);
+        Reply reply;
+        if (hasMusic){
+            reply=new Reply(content,musicName,musicId);
+        }else{
+            reply=new Reply(content);
+        }
         reply = replyService.createReply(whisperId, userId, reply);
         return "redirect:/whisper/" + whisperId;
     }
