@@ -1,18 +1,20 @@
 package com.nju.edu.cn.whispermusic.controller;
 
 
+import com.nju.edu.cn.whispermusic.service.FavoriteMusicService;
 import com.nju.edu.cn.whispermusic.vo.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
 public class MusicController {
+
+    @Autowired
+    private FavoriteMusicService favoriteMusicService;
 
     @RequestMapping(value="/searchmusic",method=RequestMethod.GET)
     public String loginPage(HttpSession session) {
@@ -21,24 +23,20 @@ public class MusicController {
 
     }
 
-
-
-    @RequestMapping(value = "/music/{whisperId}/favorite", method = RequestMethod.POST)
+    @RequestMapping(value = "/music/{musicId}/favorite", method = RequestMethod.POST)
     @ResponseBody
-    public Response favoriteWhisper(HttpSession session, @PathVariable("whisperId") Long whisperId) {
+    public Response favoriteWhisper(HttpSession session, @PathVariable("musicId") Long musicId, @RequestParam String musicName) {
         Long userId = (Long) session.getAttribute("userId");
-
-        return null;
+        favoriteMusicService.favorite(userId, musicId, musicName);
+        return new Response<>("OK!", "user-" + userId + " favorite music " + musicName + " successfully.", "");
     }
 
-    @RequestMapping(value = "/music/{whisperId}/unfavorite", method = RequestMethod.POST)
+    @RequestMapping(value = "/music/{musicId}/unfavorite", method = RequestMethod.POST)
     @ResponseBody
-    public Response unfavoriteWhisper(HttpSession session, @PathVariable("whisperId") Long whisperId) {
+    public Response unfavoriteWhisper(HttpSession session, @PathVariable("musicId") Long musicId) {
         Long userId = (Long) session.getAttribute("userId");
-
-        return null;
+        favoriteMusicService.unfavorite(userId, musicId);
+        return new Response<>("OK!", "user-" + userId + " unfavorite music-" + musicId + " successfully.", "");
     }
-
-
 
 }

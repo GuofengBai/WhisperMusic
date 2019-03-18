@@ -1,11 +1,9 @@
 package com.nju.edu.cn.whispermusic.controller;
 
+import com.nju.edu.cn.whispermusic.entity.FavoriteMusic;
 import com.nju.edu.cn.whispermusic.entity.Reply;
 import com.nju.edu.cn.whispermusic.entity.Whisper;
-import com.nju.edu.cn.whispermusic.service.FavoriteWhisperService;
-import com.nju.edu.cn.whispermusic.service.ReplyService;
-import com.nju.edu.cn.whispermusic.service.UserService;
-import com.nju.edu.cn.whispermusic.service.WhisperService;
+import com.nju.edu.cn.whispermusic.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -33,6 +31,9 @@ public class UserController {
 
     @Autowired
     private FavoriteWhisperService favoriteWhisperService;
+
+    @Autowired
+    private FavoriteMusicService favoriteMusicService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String userHomePage(HttpSession session) {
@@ -67,6 +68,14 @@ public class UserController {
         Page<Whisper> whisperPage = favoriteWhisperService.favoriteWhisperOfUser(userId, page);
         model.addAttribute("page", whisperPage);
         return "favoriteWhisper";
+    }
+
+    @RequestMapping(value = "/FavoriteMusic", method = RequestMethod.GET)
+    public String favoriteMusicPage(HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("userId");
+        List<FavoriteMusic> favoriteMusics = favoriteMusicService.getFavoriteMusicOfUser(userId);
+        model.addAttribute("favoriteMusic", favoriteMusics);
+        return "favoriteMusic";
     }
 
 }

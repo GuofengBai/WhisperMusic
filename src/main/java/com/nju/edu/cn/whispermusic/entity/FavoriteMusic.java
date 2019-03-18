@@ -3,6 +3,7 @@ package com.nju.edu.cn.whispermusic.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class FavoriteMusic {
@@ -15,12 +16,15 @@ public class FavoriteMusic {
 
     private String musicName;
 
-    private String musicId;
+    private Long musicId;
 
-    public FavoriteMusic(Long userId, String musicName, String musicId) {
+    private Date date;
+
+    public FavoriteMusic(Long userId, String musicName, Long musicId) {
         this.userId = userId;
         this.musicName = musicName;
         this.musicId = musicId;
+        this.date = new Date();
     }
 
     public Long getId() {
@@ -47,11 +51,19 @@ public class FavoriteMusic {
         this.musicName = musicName;
     }
 
-    public String getMusicId() {
+    public Long getMusicId() {
         return musicId;
     }
 
-    public void setMusicId(String musicId) {
+    public void setMusicId(Long musicId) {
         this.musicId = musicId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
