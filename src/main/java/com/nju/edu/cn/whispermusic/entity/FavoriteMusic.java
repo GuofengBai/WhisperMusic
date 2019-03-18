@@ -20,6 +20,9 @@ public class FavoriteMusic {
 
     private Date date;
 
+    public FavoriteMusic(){
+    }
+
     public FavoriteMusic(Long userId, String musicName, Long musicId) {
         this.userId = userId;
         this.musicName = musicName;

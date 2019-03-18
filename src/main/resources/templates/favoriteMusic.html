@@ -35,7 +35,7 @@
                 <td>操作</td>
             </tr>
             </thead>
-            <tr th:each="music:${page.content}">
+            <tr th:each="music:${favoriteMusic}">
                 <td><p th:text="${music.musicName}"></p></td>
                 <td><button class="btn btn-danger" type="button" th:onclick="'javascript:unfavourite('+${music.musicId}+')'">取消收藏</button></td>
             </tr>

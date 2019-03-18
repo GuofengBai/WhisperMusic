@@ -18,6 +18,7 @@ function searchMusic() {
                     var name=songs[i].name + ' - ' + songs[i].artists[0].name;
                     var str = '<td>' + name + '</td>';
                     str = str + '<td>' + '<button class=\"btn btn-primary\" type=\"button\" onclick=\"javascript:musicChange(' + songs[i].id + ')\">播放</button>' + '</td>';
+                    str = str + '<td>' + '<button class=\"btn btn-primary\" type=\"button\" onclick=\"javascript:favourite(' + songs[i].id +',\''+name+ '\')\">收藏</button>' + '</td>';
                     str = str + '<td>' + '<a href=\"/whisper/new/' + songs[i].id + '/' + name + '\">' + '<button class=\"btn btn-primary\" type=\"button\">创建悄悄话</button>' + '</a>' + '</td>';
                     str = '<tr>' + str + '</tr>';
                     $("#songtable").append(str)
@@ -39,19 +40,19 @@ function musicChange(id) {
 
 }
 
-function favourite(id){
+function favourite(id,name){
     if(!(id)) {
         alert('请输入全部字段！');
         return;
     }
     $.ajax({
-        url : '/music/'+id+'/favorite',
+        url : '/music/'+id+'/favorite?musicName='+name,
         data : {
         },
         dataType : 'json',
         type : 'post',
         success: function (result) {
-            location.reload(true);
+            alert('收藏成功！');
 
         },
         error:function(err){
@@ -61,23 +62,23 @@ function favourite(id){
     });
 
 }
-function unfavourite(id){
-    if(!(id)) {
+function unfavourite(id) {
+    if (!(id)) {
         alert('请输入全部字段！');
         return;
     }
     $.ajax({
-        url : '/music/'+id+'/unfavorite',
-        data : {
-        },
-        dataType : 'json',
-        type : 'post',
+        url: '/music/' + id + '/unfavorite',
+        data: {},
+        dataType: 'json',
+        type: 'post',
         success: function (result) {
             location.reload(true);
 
         },
-        error:function(err){
+        error: function (err) {
             location.reload(true);
             alert('取消收藏失败！');
         }
     });
+}
