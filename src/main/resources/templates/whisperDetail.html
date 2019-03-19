@@ -30,10 +30,18 @@
         </div>
 
         <div th:if="${whisper.hasMusic}">
-            <div>
-                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=530 height=86
-                        th:src="'//music.163.com/outchain/player?type=2&id='+${whisper.musicId}+'&auto=1&&height=66'"
-                        id="music_player"></iframe>
+            <div class="row">
+                <div class="col-lg-6">
+                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=530 height=86
+                            th:src="'//music.163.com/outchain/player?type=2&id='+${whisper.musicId}+'&auto=1&&height=66'"
+                            id="music_player"></iframe>
+                </div>
+                <div class="col-lg-6" style="padding-top: 9px">
+                    <button class="btn btn-success" type="button" style="width: 100px;"
+                            th:onclick="replymusic_favourite([[${whisper.musicId}]],[[${whisper.musicName}]])">
+                        收藏音乐
+                    </button>
+                </div>
             </div>
 
         </div>
@@ -163,17 +171,17 @@
 
         </form>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <hr>
         <form>
             <label>关键字&emsp;</label>
             <input id="keyword" name="keyword" type="text">
-            <button class="btn btn-primary" type="button" th:onclick="'javascript:searchMusic()'">搜索
+            <button class="btn btn-primary" type="button" th:onclick="'javascript:replyMusic_searchMusic()'">搜索
             </button>
         </form>
-
+        <br>
     </div>
-    <div class="col-lg-8" style="max-height:300px;overflow:auto;">
+    <div class="col-lg-12" style="max-height:300px;overflow:auto;">
         <table class="table table-hover" id="songtable">
             <thead>
             <tr>
