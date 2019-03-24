@@ -1,7 +1,7 @@
 function newWhisper_searchMusic() {
     var key = document.getElementById("keyword").value;
     $.ajax({
-        url: 'http://localhost:3000/search?keywords=' + key,
+        url: 'http://172.19.240.204:3000/search?keywords=' + key,
         data: {},
         dataType: 'json',
         type: 'get',
