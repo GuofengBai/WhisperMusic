@@ -22,6 +22,12 @@ public class MainController{
         return "login";
 
     }
+    @RequestMapping(value="/error",method=RequestMethod.GET)
+    public String errorPage(HttpSession session) {
+
+        return "error";
+
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpSession session, String username, String password) {
